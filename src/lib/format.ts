@@ -1,4 +1,5 @@
-export const lv = (cents: number): string => `${(cents / 100).toFixed(2)} лв`;
+export const money = (cents: number, currency: 'EUR' | 'BGN' = 'EUR'): string =>
+  `${(cents / 100).toFixed(2)} ${currency === 'BGN' ? 'лв' : '€'}`;
 
 export const fmtSize = (bytes: number): string =>
   bytes >= 1024 * 1024

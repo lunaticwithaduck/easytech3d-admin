@@ -22,6 +22,7 @@ export interface AdminOrder {
   subtotalCents: number;
   shippingCents: number;
   totalCents: number;
+  currency: 'EUR' | 'BGN';
   status: 'PENDING_PAYMENT' | 'CONFIRMED' | 'CANCELLED' | 'FULFILLED';
   paymentMethod: 'COD' | 'CARD';
   paymentStatus: string;

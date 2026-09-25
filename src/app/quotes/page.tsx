@@ -3,7 +3,7 @@ import { AdminShell } from '@/components/AdminShell';
 import { StatusSelect } from '@/components/StatusSelect';
 import { adminFetch } from '@/lib/api';
 import { requireAuth } from '@/lib/auth';
-import { QUOTE_STATUS, fmtDate, fmtSize, lv } from '@/lib/format';
+import { QUOTE_STATUS, fmtDate, fmtSize, money } from '@/lib/format';
 import type { AdminQuote } from '@/lib/types';
 
 export const dynamic = 'force-dynamic';
@@ -58,7 +58,7 @@ export default async function QuotesPage() {
                     <span className="text-slate-400">{q.fileNames.join(', ') || '—'}</span>
                   )}
                 </td>
-                <td className="px-4 py-3 font-semibold text-slate-900">{lv(q.totalPriceCents)}</td>
+                <td className="px-4 py-3 font-semibold text-slate-900">{money(q.totalPriceCents)}</td>
                 <td className="px-4 py-3 text-slate-500">{fmtDate(q.createdAt)}</td>
                 <td className="px-4 py-3">
                   <StatusSelect id={q.id} value={q.status} options={QUOTE_STATUS} action={updateQuoteStatus} />

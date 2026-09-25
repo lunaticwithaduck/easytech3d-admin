@@ -3,7 +3,7 @@ import { AdminShell } from '@/components/AdminShell';
 import { StatusSelect } from '@/components/StatusSelect';
 import { adminFetch } from '@/lib/api';
 import { requireAuth } from '@/lib/auth';
-import { ORDER_STATUS, fmtDate, lv } from '@/lib/format';
+import { ORDER_STATUS, fmtDate, money } from '@/lib/format';
 import type { AdminOrder } from '@/lib/types';
 
 export const dynamic = 'force-dynamic';
@@ -46,7 +46,7 @@ export default async function OrdersPage() {
                   )}
                 </td>
                 <td className="px-4 py-3 text-slate-600">{o.paymentMethod === 'COD' ? 'Наложен платеж' : 'Карта'}</td>
-                <td className="px-4 py-3 font-semibold text-slate-900">{lv(o.totalCents)}</td>
+                <td className="px-4 py-3 font-semibold text-slate-900">{money(o.totalCents, o.currency)}</td>
                 <td className="px-4 py-3 text-slate-500">{fmtDate(o.createdAt)}</td>
                 <td className="px-4 py-3">
                   <StatusSelect id={o.id} value={o.status} options={ORDER_STATUS} action={updateOrderStatus} />

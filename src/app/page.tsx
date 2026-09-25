@@ -1,7 +1,7 @@
 import { AdminShell } from '@/components/AdminShell';
 import { adminFetch } from '@/lib/api';
 import { requireAuth } from '@/lib/auth';
-import { fmtDate, lv, statusTone } from '@/lib/format';
+import { fmtDate, money, statusTone } from '@/lib/format';
 import type { AdminStats } from '@/lib/types';
 
 export const dynamic = 'force-dynamic';
@@ -11,7 +11,7 @@ export default async function DashboardPage() {
   const s = await adminFetch<AdminStats>('/admin/stats');
 
   const cards = [
-    { label: 'Приходи', value: lv(s.revenueCents) },
+    { label: 'Приходи', value: money(s.revenueCents) },
     { label: 'Поръчки', value: s.ordersCount },
     { label: '3D Заявки', value: s.quotesCount },
     { label: 'Запитвания', value: s.messagesCount },
@@ -41,7 +41,7 @@ export default async function DashboardPage() {
                 </span>
                 <span className="flex shrink-0 items-center gap-2">
                   <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${statusTone(o.status)}`}>{o.status}</span>
-                  <span className="font-semibold">{lv(o.totalCents)}</span>
+                  <span className="font-semibold">{money(o.totalCents, o.currency)}</span>
                 </span>
               </li>
             ))}
@@ -59,7 +59,7 @@ export default async function DashboardPage() {
                 </span>
                 <span className="flex shrink-0 items-center gap-2">
                   <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${statusTone(q.status)}`}>{q.status}</span>
-                  <span className="font-semibold">{lv(q.totalPriceCents)}</span>
+                  <span className="font-semibold">{money(q.totalPriceCents)}</span>
                 </span>
               </li>
             ))}
